@@ -14,7 +14,7 @@ dependencies:
   - name: kyverno
     repository: https://kyverno.github.io/kyverno/
     version: v2.3.0
-home: https://kyverno.io/
+home: https://github.com/Cray-HPE/cray-kyverno
 sources:
   - https://github.com/kyverno/kyverno
 maintainers:
