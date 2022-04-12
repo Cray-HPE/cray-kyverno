@@ -1,0 +1,13 @@
+# Default values for cray-kyverno.
+# This is a YAML-formatted file.
+kyverno:
+  image:
+    repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
+    tag: v1.6.0
+  initImage:
+    registry:
+    repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
+    tag: v1.6.0
+ 
+ # Desired number of pods/replica
+  replicaCount: 3
