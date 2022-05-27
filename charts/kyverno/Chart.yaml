@@ -1,8 +1,8 @@
 apiVersion: v2
 type: application
 name: cray-kyverno
-version: 1.0.0
-appVersion: v1.6.0
+version: 1.1.0
+appVersion: v1.6.2
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -13,7 +13,7 @@ keywords:
 dependencies:
   - name: kyverno
     repository: https://kyverno.github.io/kyverno/
-    version: v2.3.0
+    version: v2.3.3
 home: https://github.com/Cray-HPE/cray-kyverno
 sources:
   - https://github.com/kyverno/kyverno
@@ -25,7 +25,7 @@ kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/images: |-
     - name: kyverno
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno:v1.6.0
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno:v1.6.2
     - name: kyvernopre
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre:v1.6.0
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre:v1.6.2
   artifacthub.io/license: MIT

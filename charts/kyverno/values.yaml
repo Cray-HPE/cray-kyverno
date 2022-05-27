@@ -3,11 +3,11 @@
 kyverno:
   image:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
-    tag: v1.6.0
+    tag: v1.6.2
   initImage:
     registry:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
-    tag: v1.6.0
+    tag: v1.6.2
  
  # Desired number of pods/replica
   replicaCount: 3
