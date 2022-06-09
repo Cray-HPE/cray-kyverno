@@ -8,6 +8,9 @@ kyverno:
     registry:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
     tag: v1.6.2
- 
+  testImage:
+    repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
+    tag: 1.28.0-glibc
+
  # Desired number of pods/replica
   replicaCount: 3
