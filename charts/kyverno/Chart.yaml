@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: cray-kyverno
-version: 1.1.0
+version: 1.2.0
 appVersion: v1.6.2
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -28,4 +28,6 @@ annotations:
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno:v1.6.2
     - name: kyvernopre
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre:v1.6.2
+    - name: busybox
+      image: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox:1.28.0-glibc
   artifacthub.io/license: MIT
