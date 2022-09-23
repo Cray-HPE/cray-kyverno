@@ -11,6 +11,16 @@ kyverno:
   testImage:
     repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
     tag: 1.28.0-glibc
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - kyverno
+        topologyKey: kubernetes.io/hostname
 
+  priorityClassName: csm-high-priority-service
  # Desired number of pods/replica
   replicaCount: 3
