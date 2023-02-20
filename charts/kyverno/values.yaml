@@ -4,10 +4,23 @@ kyverno:
   image:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
     tag: v1.6.2
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   initImage:
     registry:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
     tag: v1.6.2
+  initResources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 50m
+      memory: 256Mi
   testImage:
     repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
     tag: 1.28.0-glibc
