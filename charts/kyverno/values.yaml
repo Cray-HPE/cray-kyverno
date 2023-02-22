@@ -6,10 +6,10 @@ kyverno:
     tag: v1.6.2
   resources:
     limits:
-      cpu: 600m
+      cpu: 6000m
       memory: 3Gi
     requests:
-      cpu: 200m
+      cpu: 2000m
       memory: 1Gi
   initImage:
     registry:
@@ -17,10 +17,10 @@ kyverno:
     tag: v1.6.2
   initResources:
     limits:
-      cpu: 600m
+      cpu: 6000m
       memory: 3Gi
     requests:
-      cpu: 200m
+      cpu: 2000m
       memory: 1Gi
   testImage:
     repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
