@@ -3,7 +3,7 @@
 kyverno:
   image:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
-    tag: v1.6.2
+    tag: v1.7.5
   resources:
     limits:
       cpu: 6000m
@@ -14,7 +14,7 @@ kyverno:
   initImage:
     registry:
     repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
-    tag: v1.6.2
+    tag: v1.7.5
   initResources:
     limits:
       cpu: 6000m
@@ -25,6 +25,8 @@ kyverno:
   testImage:
     repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
     tag: 1.28.0-glibc
+  securityContext:
+    seccompProfile: null
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
