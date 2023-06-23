@@ -26,7 +26,8 @@ kind: PodSecurityPolicy
 metadata:
   name: {{ include "kyverno.fullname" . }}
   annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
+    seccomp.security.alpha.kubernetes.io/defaultProfileName: 'runtime/default'
 spec:
   supplementalGroups:
     ranges:
