@@ -24,12 +24,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "kyverno.fullname" . }}
+  name: {{ include "kyverno.fullname" . }}-psp
 rules:
 - apiGroups:
   - policy
   resourceNames:
-  - {{ include "kyverno.fullname" . }}
+  - {{ include "kyverno.fullname" . }}-psp
   resources:
   - podsecuritypolicies
   verbs:
