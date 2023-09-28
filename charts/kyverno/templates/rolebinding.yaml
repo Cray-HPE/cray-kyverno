@@ -25,7 +25,6 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ include "kyverno.fullname" . }}-psp-relocated
-  namespace: {{ include "kyverno.namespace" . | nindent 4 }}
   labels: {{ include "kyverno.labels" . | nindent 4 }}
     app: kyverno
 roleRef:
