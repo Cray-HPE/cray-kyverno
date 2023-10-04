@@ -27,6 +27,9 @@ kyverno:
     tag: 1.28.0-glibc
   securityContext:
     seccompProfile: null
+  cleanupController:
+    # -- Disable cleanup controller since it is not production ready.
+    enabled: false
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
