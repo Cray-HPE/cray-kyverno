@@ -28,6 +28,8 @@ annotations:
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno:v1.9.5
     - name: kyvernopre
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre:v1.9.5
+    - name: cleanupController
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller:v1.9.5
     - name: busybox
       image: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox:1.28.0-glibc
   artifacthub.io/license: MIT
