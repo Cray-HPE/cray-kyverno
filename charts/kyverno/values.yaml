@@ -29,6 +29,7 @@ kyverno:
     seccompProfile: null
   cleanupController:
     # -- Disable cleanup controller since it is not production ready.
+    # -- If cleanup controller is enabled then need to enable rbac as well
     enabled: false
     rbac:
       create: false
