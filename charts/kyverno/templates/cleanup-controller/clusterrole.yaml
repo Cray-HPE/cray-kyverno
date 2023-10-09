@@ -1,0 +1,17 @@
+{{- if .Values.kyverno.cleanupController.enabled -}}
+{{- if .Values.kyverno.cleanupController.rbac.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kyverno.cleanup-controller.name" . }}
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - {{ include "kyverno.cleanup-controller.name" . }}
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+{{- end }}
+{{- end }}
