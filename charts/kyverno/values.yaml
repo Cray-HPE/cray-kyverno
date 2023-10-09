@@ -30,6 +30,10 @@ kyverno:
   cleanupController:
     # -- Disable cleanup controller since it is not production ready.
     enabled: false
+    rbac:
+      create: false
+      saccount:
+        name: kyverno-cleanup-controller
     image:
       repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller
       tag: v1.9.5
