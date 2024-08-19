@@ -6,7 +6,7 @@ Expand the name of the chart.
 {{- end }}
 
 {{- define "kyverno.namespace" -}}
-{{ default .Release.Namespace .Values.namespaceOverride }}
+{{- default .Release.Namespace .Values.namespaceOverride }}
 {{- end -}}
 
 {{/*
