@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kyverno.cleanup-cluster-admission-reports.name" . }}
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - {{ include "kyverno.cleanup-cluster-admission-reports.name" . }}
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
