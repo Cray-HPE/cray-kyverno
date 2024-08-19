@@ -21,16 +21,34 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
 metadata:
-  name: {{ include "kyverno.fullname" . }}-psp
-rules:
-- apiGroups:
-  - policy
-  resourceNames:
-  - {{ include "kyverno.fullname" . }}-psp
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
+  name: {{ include "kyverno.cleanup-admission-reports.name" . }}
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
+    seccomp.security.alpha.kubernetes.io/defaultProfileName: 'runtime/default'
+spec:
+  supplementalGroups:
+    ranges:
+    - max: 65535
+      min: 1
+    rule: MustRunAs
+  fsGroup:
+    ranges:
+    - max: 65535
+      min: 1
+    rule: MustRunAs
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  volumes:
+  - configMap
+  - emptyDir
+  - projected
+  - secret
+  - downwardAPI
+  - persistentVolumeClaim
+  - hostPath
+  - flexVolume

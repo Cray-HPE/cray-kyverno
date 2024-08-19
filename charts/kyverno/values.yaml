@@ -1,55 +1,117 @@
 # Default values for cray-kyverno.
 # This is a YAML-formatted file.
 kyverno:
-  image:
-    repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
-    tag: v1.9.5
-  resources:
-    limits:
-      cpu: 6000m
-      memory: 3Gi
-    requests:
-      cpu: 2000m
-      memory: 1Gi
-  initImage:
-    registry:
-    repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
-    tag: v1.9.5
-  initResources:
-    limits:
-      cpu: 6000m
-      memory: 3Gi
-    requests:
-      cpu: 2000m
-      memory: 1Gi
-  testImage:
+  upgrade:
+  # -- Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed.
+    fromV2: true
+  admissionController:
+    rbac:
+      create: true
+      saccount:
+        name: kyverno-admission-controller
+    config:
+      webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]
+    initContainer:
+      image:
+        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
+        tag: v1.10.7
+      resources:
+        limits:
+          cpu: 6000m
+          memory: 3Gi
+        requests:
+          cpu: 2000m
+          memory: 1Gi
+    container:
+      image:
+        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
+        tag: v1.10.7
+      resources:
+        limits:
+          cpu: 6000m
+          memory: 3Gi
+        requests:
+          cpu: 2000m
+          memory: 1Gi
+   # Desired number of pods/replica
+    replicas: 3
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - kyverno
+          topologyKey: kubernetes.io/hostname  
+    priorityClassName: csm-high-priority-service      
+  test:
     repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
     tag: 1.28.0-glibc
-  securityContext:
-    seccompProfile: null
   cleanupController:
-    # -- Disable cleanup controller since it is not production ready.
-    # -- If cleanup controller is enabled then need to enable rbac as well
-    enabled: false
     rbac:
-      create: false
+      create: true
       saccount:
         name: kyverno-cleanup-controller
     image:
       repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller
-      tag: v1.9.5    
-  podAntiAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: app.kubernetes.io/name
-            operator: In
-            values:
-            - kyverno
-        topologyKey: kubernetes.io/hostname
-
-  priorityClassName: csm-high-priority-service
- # Desired number of pods/replica
-  replicaCount: 3
-  config:
-    webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kyverno","kube-system"]}]}}]
+      tag: v1.10.7
+    resources:
+      limits:
+        cpu: 6000m
+        memory: 3Gi
+      requests:
+        cpu: 2000m
+        memory: 1Gi
+  reportsController:
+    rbac:
+      create: true
+      saccount:
+        name: kyverno-reports-controller
+    image:
+      repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller
+      tag: v1.10.7
+    resources:
+      limits:
+        cpu: 6000m
+        memory: 3Gi
+      requests:
+        cpu: 2000m
+        memory: 1Gi
+  backgroundController:
+    rbac:
+      create: true
+      saccount:
+        name: kyverno-background-controller
+    image:
+      repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller
+      tag: v1.10.7
+    resources:
+      limits:
+        cpu: 6000m
+        memory: 3Gi
+      requests:
+        cpu: 2000m
+        memory: 1Gi
+  cleanupJobs:
+    admissionReports:
+      rbac:
+        create: true
+        saccount:
+          name: kyverno-cleanup-jobs
+      image:
+        repository: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl
+        tag: 1.26.4
+    clusterAdmissionReports:
+      rbac:
+        create: true
+        saccount:
+          name: kyverno-cleanup-jobs
+      image:
+        repository: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl
+        tag: 1.26.4
+  webhooksCleanup:
+    image: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl:1.26.4
+      
+  securityContext:
+    seccompProfile: null

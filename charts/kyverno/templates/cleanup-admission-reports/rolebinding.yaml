@@ -1,13 +1,13 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "kyverno.cleanup-controller.name" . }}
+  name: {{ include "kyverno.cleanup-admission-reports.name" . }}
   namespace: {{ template "kyverno.namespace" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "kyverno.cleanup-controller.name" . }}
+  name: {{ include "kyverno.cleanup-admission-reports.name" . }}
 subjects:
 - kind: ServiceAccount
-  name: {{ include "kyverno.cleanup-controller.sAccountName" . }}
+  name: {{ include "kyverno.cleanup-admission-reports.sAccountName" . }}
   namespace: {{ template "kyverno.namespace" . }}
