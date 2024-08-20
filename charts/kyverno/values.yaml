@@ -13,7 +13,7 @@ kyverno:
       webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]
     initContainer:
       image:
-        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
+        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
         tag: v1.10.7
       resources:
         limits:
@@ -24,7 +24,7 @@ kyverno:
           memory: 1Gi
     container:
       image:
-        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
+        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
         tag: v1.10.7
       resources:
         limits:
@@ -33,7 +33,7 @@ kyverno:
         requests:
           cpu: 2000m
           memory: 1Gi
-   # Desired number of pods/replica
+    # Desired number of pods/replica
     replicas: 3
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -43,11 +43,14 @@ kyverno:
               operator: In
               values:
               - kyverno
-          topologyKey: kubernetes.io/hostname  
-    priorityClassName: csm-high-priority-service      
+          topologyKey: kubernetes.io/hostname
+
+    priorityClassName: csm-high-priority-service
+
   test:
-    repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
-    tag: 1.28.0-glibc
+    image:
+      repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
+      tag: 1.28.0-glibc
   cleanupController:
     rbac:
       create: true
@@ -112,6 +115,6 @@ kyverno:
         tag: 1.26.4
   webhooksCleanup:
     image: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl:1.26.4
-      
+
   securityContext:
     seccompProfile: null
