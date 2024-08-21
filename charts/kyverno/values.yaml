@@ -13,7 +13,8 @@ kyverno:
       webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]
     initContainer:
       image:
-        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre
+        registry: artifactory.algol60.net
+        repository: csm-docker/stable/ghcr.io/kyverno/kyvernopre
         tag: v1.10.7
       resources:
         limits:
@@ -24,7 +25,8 @@ kyverno:
           memory: 1Gi
     container:
       image:
-        repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno
+        registry: artifactory.algol60.net
+        repository: csm-docker/stable/ghcr.io/kyverno/kyverno
         tag: v1.10.7
       resources:
         limits:
@@ -57,7 +59,8 @@ kyverno:
       saccount:
         name: kyverno-cleanup-controller
     image:
-      repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/ghcr.io/kyverno/cleanup-controller
       tag: v1.10.7
     resources:
       limits:
@@ -72,7 +75,8 @@ kyverno:
       saccount:
         name: kyverno-reports-controller
     image:
-      repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/ghcr.io/kyverno/reports-controller
       tag: v1.10.7
     resources:
       limits:
@@ -87,7 +91,8 @@ kyverno:
       saccount:
         name: kyverno-background-controller
     image:
-      repository: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/ghcr.io/kyverno/background-controller
       tag: v1.10.7
     resources:
       limits:
@@ -103,7 +108,8 @@ kyverno:
         saccount:
           name: kyverno-cleanup-jobs
       image:
-        repository: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl
+        registry: artifactory.algol60.net
+        repository: csm-docker/stable/docker.io/bitnami/kubectl
         tag: 1.26.4
     clusterAdmissionReports:
       rbac:
@@ -111,7 +117,8 @@ kyverno:
         saccount:
           name: kyverno-cleanup-jobs
       image:
-        repository: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl
+        registry: artifactory.algol60.net
+        repository: csm-docker/stable/docker.io/bitnami/kubectl
         tag: 1.26.4
   webhooksCleanup:
     image: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl:1.26.4
