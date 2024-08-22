@@ -15,7 +15,7 @@ spec:
       name: "{{ .Release.Name }}"
     spec:
       restartPolicy: Never
-      serviceAccount: {{ template "kyverno.admission-controller.serviceAccountName" . }}
+      serviceAccount: {{ template "kyverno.admission-controller.sAccountName" . }}
       containers:
         - name: "build-kyverno-trust"
           image: {{ .Values.webhooksCleanup.image }}
