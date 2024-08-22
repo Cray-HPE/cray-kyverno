@@ -18,7 +18,7 @@ spec:
       serviceAccount: {{ template "kyverno.admission-controller.sAccountName" . }}
       containers:
         - name: "build-kyverno-trust"
-          image: {{ .Values.webhooksCleanup.image }}
+          image: {{ .Values.kyverno.webhooksCleanup.image }}
           command:
             - '/bin/sh'
           args:
