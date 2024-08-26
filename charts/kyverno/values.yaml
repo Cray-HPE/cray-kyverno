@@ -122,6 +122,15 @@ kyverno:
         tag: 1.26.4
   webhooksCleanup:
     image: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl:1.26.4
+  buildKyvernoTrust:
+    rbac:
+      create: true
+      saccount:
+        name: post-install-job
+    image:
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/docker.io/bitnami/kubectl
+      tag: 1.26.4
 
   securityContext:
     seccompProfile: null
