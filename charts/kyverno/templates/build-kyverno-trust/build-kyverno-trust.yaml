@@ -21,9 +21,15 @@ spec:
           image: {{ .Values.kyverno.buildKyvernoTrust.image.registry }}/{{ .Values.kyverno.buildKyvernoTrust.image.repository }}:{{ .Values.kyverno.buildKyvernoTrust.image.tag }}
           command:
             - '/bin/sh'
-          args:
             - '-c'
-            - 'cd /usr/local/sbin && sh build-trust.sh '
+            - |
+              echo "Running the Kyverno patch..."
+              cd /usr/local/sbin && sh build-trust.sh
+              echo "Waiting for Kyverno deployment to complete rollout..."
+              kubectl rollout status deployment kyverno-admission-controller -n kyverno --timeout=60s
+              echo "Kyverno deployment has successfully rolled out."
+              sleep 20
+              echo "slept for 20 secs"
           volumeMounts:
           - mountPath: /usr/local/sbin
             name: build-kyverno-trust
