@@ -21,9 +21,13 @@ spec:
           image: {{ .Values.kyverno.buildKyvernoTrust.image.registry }}/{{ .Values.kyverno.buildKyvernoTrust.image.repository }}:{{ .Values.kyverno.buildKyvernoTrust.image.tag }}
           command:
             - '/bin/sh'
-          args:
             - '-c'
-            - 'cd /usr/local/sbin && sh build-trust.sh '
+            - |
+              cd /usr/local/sbin && sh build-trust.sh
+              # Waiting for Kyverno deployment to complete rollout
+              kubectl rollout status deployment kyverno-admission-controller -n kyverno --timeout=60s
+              # Waiting for 20 secs to avoid webhook timeouts. Known limitation in Kyverno w.r.t webhooks on 1.10.x.
+              sleep 20
           volumeMounts:
           - mountPath: /usr/local/sbin
             name: build-kyverno-trust
