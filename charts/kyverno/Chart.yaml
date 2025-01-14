@@ -2,7 +2,7 @@ apiVersion: v2
 type: application
 name: cray-kyverno
 version: 1.7.0
-appVersion: v1.10.7
+appVersion: v1.13.2
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -13,7 +13,7 @@ keywords:
 dependencies:
   - name: kyverno
     repository: https://kyverno.github.io/kyverno/
-    version: v3.0.9
+    version: v3.3.4
 home: https://github.com/Cray-HPE/cray-kyverno
 sources:
   - https://github.com/kyverno/kyverno
@@ -25,15 +25,15 @@ kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/images: |-
     - name: kyverno
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno:v1.10.7
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno:v1.13.2
     - name: kyvernopre
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre:v1.10.7
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyvernopre:v1.13.2
     - name: cleanupController
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller:v1.10.7
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller:v1.13.2
     - name: reportsController
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller:v1.10.7
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller:v1.13.2
     - name: backgroundController
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller:v1.10.7
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller:v1.13.2
     - name: busybox
       image: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox:1.28.0-glibc
   artifacthub.io/license: MIT
