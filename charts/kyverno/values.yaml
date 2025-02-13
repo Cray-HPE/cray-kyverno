@@ -112,7 +112,10 @@ kyverno:
         repository: csm-docker/stable/docker.io/bitnami/kubectl
         tag: 1.31.0
   webhooksCleanup:
-    image: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl:1.31.0
+    image:
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/docker.io/bitnami/kubectl
+      tag: 1.31.0
   buildKyvernoTrust:
     rbac:
       create: true
