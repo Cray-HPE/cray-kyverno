@@ -10,8 +10,6 @@ kyverno:
   admissionController:
     rbac:
       create: true
-      saccount:
-        name: kyverno-admission-controller
     config:
       webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]
     initContainer:
@@ -59,8 +57,6 @@ kyverno:
   cleanupController:
     rbac:
       create: true
-      saccount:
-        name: kyverno-cleanup-controller
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/cleanup-controller
@@ -75,8 +71,6 @@ kyverno:
   reportsController:
     rbac:
       create: true
-      saccount:
-        name: kyverno-reports-controller
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/reports-controller
@@ -91,8 +85,6 @@ kyverno:
   backgroundController:
     rbac:
       create: true
-      saccount:
-        name: kyverno-background-controller
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/background-controller
@@ -108,8 +100,6 @@ kyverno:
     admissionReports:
       rbac:
         create: true
-        saccount:
-          name: kyverno-cleanup-jobs
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/docker.io/bitnami/kubectl
@@ -117,8 +107,6 @@ kyverno:
     clusterAdmissionReports:
       rbac:
         create: true
-        saccount:
-          name: kyverno-cleanup-jobs
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/docker.io/bitnami/kubectl

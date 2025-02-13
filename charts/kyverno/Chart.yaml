@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: cray-kyverno
-version: 1.6.6
+version: 1.7.0
 appVersion: v1.10.7
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -31,9 +31,9 @@ annotations:
     - name: cleanupController
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/cleanup-controller:v1.10.7
     - name: reportsController
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller:v1.10.7    
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller:v1.10.7
     - name: backgroundController
-      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller:v1.10.7          
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller:v1.10.7
     - name: busybox
       image: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox:1.28.0-glibc
   artifacthub.io/license: MIT
