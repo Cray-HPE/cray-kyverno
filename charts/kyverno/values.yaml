@@ -122,6 +122,6 @@ kyverno:
     policyExceptions:
       # -- Enables the feature
       enabled: true
-      namespace: *
+      namespace: '*'
 
 
