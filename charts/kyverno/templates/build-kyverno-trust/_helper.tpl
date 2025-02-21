@@ -1,7 +1,7 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{- define "kyverno.post-install-job.name" -}}
-{{ template "kyverno.name" . }}-post-install-job
+  kyverno-post-install-job
 {{- end -}}
 
 {{/* Create the name of the service account to use */}}

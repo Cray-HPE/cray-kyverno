@@ -1,1 +1,0 @@
-The official kyverno chart installed with some cray-specific overrides and defaults

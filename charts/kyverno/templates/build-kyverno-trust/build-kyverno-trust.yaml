@@ -27,7 +27,7 @@ spec:
               # Waiting for Kyverno deployment to complete rollout
               kubectl rollout status deployment kyverno-admission-controller -n kyverno --timeout=60s
               # Waiting for 20 secs to avoid webhook timeouts. Known limitation in Kyverno w.r.t webhooks on 1.10.x.
-              sleep 20
+              # sleep 20
           volumeMounts:
           - mountPath: /usr/local/sbin
             name: build-kyverno-trust

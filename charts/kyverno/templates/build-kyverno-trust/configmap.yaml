@@ -50,3 +50,117 @@ data:
         ]
       }
     ]'
+    kubectl patch deployment kyverno-background-controller -n kyverno --type=json -p='[
+      {
+        "op": "add",
+        "path": "/spec/template/spec/volumes",
+        "value": [
+          {
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "configMap": {
+              "name": "kyverno-certs",
+              "items": [
+                {
+                  "key": "ca-certificates",
+                  "path": "ca-certificates.crt"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/spec/template/spec/containers/0/volumeMounts",
+        "value": [
+          {
+            "mountPath": "/.sigstore",
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "mountPath": "/etc/ssl/certs/ca-certificates.crt",
+            "subPath": "ca-certificates.crt"
+          }
+        ]
+      }
+    ]'
+    kubectl patch deployment kyverno-cleanup-controller -n kyverno --type=json -p='[
+      {
+        "op": "add",
+        "path": "/spec/template/spec/volumes",
+        "value": [
+          {
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "configMap": {
+              "name": "kyverno-certs",
+              "items": [
+                {
+                  "key": "ca-certificates",
+                  "path": "ca-certificates.crt"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/spec/template/spec/containers/0/volumeMounts",
+        "value": [
+          {
+            "mountPath": "/.sigstore",
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "mountPath": "/etc/ssl/certs/ca-certificates.crt",
+            "subPath": "ca-certificates.crt"
+          }
+        ]
+      }
+    ]'
+    kubectl patch deployment kyverno-reports-controller -n kyverno --type=json -p='[
+      {
+        "op": "add",
+        "path": "/spec/template/spec/volumes",
+        "value": [
+          {
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "configMap": {
+              "name": "kyverno-certs",
+              "items": [
+                {
+                  "key": "ca-certificates",
+                  "path": "ca-certificates.crt"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/spec/template/spec/containers/0/volumeMounts",
+        "value": [
+          {
+            "mountPath": "/.sigstore",
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "mountPath": "/etc/ssl/certs/ca-certificates.crt",
+            "subPath": "ca-certificates.crt"
+          }
+        ]
+      }
+    ]'
