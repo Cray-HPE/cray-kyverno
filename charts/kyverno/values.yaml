@@ -7,6 +7,10 @@ kyverno:
   features:
     backgroundScan:
       skipResourceFilters: false
+    policyExceptions:      
+      # -- Enables the feature
+      enabled: true
+      namespace: '*'      
   admissionController:
     config:
       webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]
@@ -118,10 +122,6 @@ kyverno:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
       tag: 1.31.0
-  features:
-    policyExceptions:
-      # -- Enables the feature
-      enabled: true
-      namespace: '*'
+
 
 
