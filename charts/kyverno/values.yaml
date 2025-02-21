@@ -8,15 +8,13 @@ kyverno:
     backgroundScan:
       skipResourceFilters: false
   admissionController:
-    rbac:
-      create: true
     config:
       webhooks: [{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]
     initContainer:
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/ghcr.io/kyverno/kyvernopre
-        tag: v1.10.7
+        tag: v1.13.2
       resources:
         limits:
           cpu: 6000m
@@ -28,7 +26,7 @@ kyverno:
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/ghcr.io/kyverno/kyverno
-        tag: v1.10.7
+        tag: v1.13.2
       resources:
         limits:
           cpu: 6000m
@@ -55,12 +53,10 @@ kyverno:
       repository: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox
       tag: 1.28.0-glibc
   cleanupController:
-    rbac:
-      create: true
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/cleanup-controller
-      tag: v1.10.7
+      tag: v1.13.2
     resources:
       limits:
         cpu: 6000m
@@ -69,12 +65,10 @@ kyverno:
         cpu: 2000m
         memory: 1Gi
   reportsController:
-    rbac:
-      create: true
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/reports-controller
-      tag: v1.10.7
+      tag: v1.13.2
     resources:
       limits:
         cpu: 6000m
@@ -83,12 +77,10 @@ kyverno:
         cpu: 2000m
         memory: 1Gi
   backgroundController:
-    rbac:
-      create: true
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/background-controller
-      tag: v1.10.7
+      tag: v1.13.2
     resources:
       limits:
         cpu: 6000m
@@ -98,21 +90,25 @@ kyverno:
         memory: 1Gi
   cleanupJobs:
     admissionReports:
-      rbac:
-        create: true
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/docker.io/bitnami/kubectl
         tag: 1.31.0
     clusterAdmissionReports:
-      rbac:
-        create: true
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/docker.io/bitnami/kubectl
         tag: 1.31.0
   webhooksCleanup:
-    image: artifactory.algol60.net/csm-docker/stable/docker.io/bitnami/kubectl:1.31.0
+    image: 
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/docker.io/bitnami/kubectl
+      tag: 1.31.0
+  policyReportsCleanup:
+    image: 
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/docker.io/bitnami/kubectl
+      tag: 1.31.0    
   buildKyvernoTrust:
     rbac:
       create: true
@@ -122,6 +118,9 @@ kyverno:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
       tag: 1.31.0
+  features:
+    policyExceptions:
+      # -- Enables the feature
+      enabled: true
+      namespace: *
 
-  securityContext:
-    seccompProfile: null
