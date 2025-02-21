@@ -1,3 +1,19 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "kyverno.post-install-job.name" . }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "-10"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "kyverno.post-install-job.name" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "kyverno.post-install-job.sAccountName" . }}
+  namespace: {{ template "kyverno.namespace" . }}
+crayadm@csm-security:~/working_171-1132/cray-kyverno/templates/build-kyverno-trust> cat configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -13,6 +29,120 @@ data:
     cat "$CERT_PATH1" "$CERT_PATH2" > /tmp/combined-certs.crt
     kubectl create configmap kyverno-certs --from-file=ca-certificates=/tmp/combined-certs.crt --namespace=kyverno --dry-run=client -o yaml | kubectl apply -f -
     kubectl patch deployment kyverno-admission-controller -n kyverno --type=json -p='[
+      {
+        "op": "add",
+        "path": "/spec/template/spec/volumes",
+        "value": [
+          {
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "configMap": {
+              "name": "kyverno-certs",
+              "items": [
+                {
+                  "key": "ca-certificates",
+                  "path": "ca-certificates.crt"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/spec/template/spec/containers/0/volumeMounts",
+        "value": [
+          {
+            "mountPath": "/.sigstore",
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "mountPath": "/etc/ssl/certs/ca-certificates.crt",
+            "subPath": "ca-certificates.crt"
+          }
+        ]
+      }
+    ]'
+    kubectl patch deployment kyverno-background-controller -n kyverno --type=json -p='[
+      {
+        "op": "add",
+        "path": "/spec/template/spec/volumes",
+        "value": [
+          {
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "configMap": {
+              "name": "kyverno-certs",
+              "items": [
+                {
+                  "key": "ca-certificates",
+                  "path": "ca-certificates.crt"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/spec/template/spec/containers/0/volumeMounts",
+        "value": [
+          {
+            "mountPath": "/.sigstore",
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "mountPath": "/etc/ssl/certs/ca-certificates.crt",
+            "subPath": "ca-certificates.crt"
+          }
+        ]
+      }
+    ]'
+    kubectl patch deployment kyverno-cleanup-controller -n kyverno --type=json -p='[
+      {
+        "op": "add",
+        "path": "/spec/template/spec/volumes",
+        "value": [
+          {
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "configMap": {
+              "name": "kyverno-certs",
+              "items": [
+                {
+                  "key": "ca-certificates",
+                  "path": "ca-certificates.crt"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/spec/template/spec/containers/0/volumeMounts",
+        "value": [
+          {
+            "mountPath": "/.sigstore",
+            "name": "sigstore"
+          },
+          {
+            "name": "ca-certificates",
+            "mountPath": "/etc/ssl/certs/ca-certificates.crt",
+            "subPath": "ca-certificates.crt"
+          }
+        ]
+      }
+    ]'
+    kubectl patch deployment kyverno-reports-controller -n kyverno --type=json -p='[
       {
         "op": "add",
         "path": "/spec/template/spec/volumes",
