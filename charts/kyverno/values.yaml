@@ -18,7 +18,7 @@ kyverno:
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/ghcr.io/kyverno/kyvernopre
-        tag: v1.13.2
+        tag: v1.13.4
       resources:
         limits:
           cpu: 6000m
@@ -30,7 +30,7 @@ kyverno:
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/ghcr.io/kyverno/kyverno
-        tag: v1.13.2
+        tag: v1.13.4
       resources:
         limits:
           cpu: 6000m
@@ -60,7 +60,7 @@ kyverno:
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/cleanup-controller
-      tag: v1.13.2
+      tag: v1.13.4
     resources:
       limits:
         cpu: 6000m
@@ -72,7 +72,7 @@ kyverno:
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/reports-controller
-      tag: v1.13.2
+      tag: v1.13.4
     resources:
       limits:
         cpu: 6000m
@@ -84,7 +84,7 @@ kyverno:
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/ghcr.io/kyverno/background-controller
-      tag: v1.13.2
+      tag: v1.13.4
     resources:
       limits:
         cpu: 6000m
