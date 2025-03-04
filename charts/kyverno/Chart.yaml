@@ -34,6 +34,8 @@ annotations:
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/reports-controller:v1.13.4
     - name: backgroundController
       image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/background-controller:v1.13.4
+    - name: kyvernoCli
+      image: artifactory.algol60.net/csm-docker/stable/ghcr.io/kyverno/kyverno-cli:v1.13.4      
     - name: busybox
       image: artifactory.algol60.net/csm-docker/stable/docker.io/library/busybox:1.28.0-glibc
   artifacthub.io/license: MIT
