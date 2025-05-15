@@ -12,4 +12,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: {{ include "kyverno.pre-upgrade-job.sAccountName" . }}
-  namespace: {{ template "kyverno.namespace" . }}
+  namespace: kyverno
