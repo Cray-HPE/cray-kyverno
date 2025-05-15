@@ -1,0 +1,39 @@
+{{- if .Values.kyverno.deleteCrd.enabled -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "kyverno.fullname" . }}-hook-pre-upgrade
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "10"
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+spec:
+  template:
+    spec:
+      serviceAccount: {{ include "kyverno.pre-upgrade-job.sAccountName" . }}
+      securityContext:
+        runAsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 65534
+      restartPolicy: Never
+      containers:
+        - name: {{ include "kyverno.pre-upgrade-job.name" . }}
+          image: {{ .Values.kyverno.deleteCrd.image.registry }}/{{ .Values.kyverno.deleteCrd.image.repository }}:{{ .Values.kyverno.deleteCrd.image.tag }}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              cd /usr/local/sbin && sh deleteCRD.sh
+          volumeMounts:
+          - mountPath: /usr/local/sbin
+            name: delete-crd
+          securityContext:
+            runAsGroup: 65534
+            runAsNonRoot: true
+            runAsUser: 65534
+      volumes:
+      - name: delete-crd
+        configMap:
+          name: delete-crd
+          defaultMode: 0755
+{{- end -}}
