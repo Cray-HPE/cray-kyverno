@@ -1,7 +1,7 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{- define "kyverno.pre-upgrade-job.name" -}}
-{{ template "kyverno.name" . }}-pre-upgrade-job
+  kyverno-pre-upgrade-job
 {{- end -}}
 
 {{/* Create the name of the service account to use */}}
