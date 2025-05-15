@@ -6,6 +6,7 @@ kyverno:
     fromV2: true
   crds:
     migration:
+      enabled: false
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/ghcr.io/kyverno/kyverno-cli
@@ -128,6 +129,16 @@ kyverno:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
       tag: 1.32.3
+  deleteCrd:
+    enabled: true
+    rbac:
+      create: true
+      saccount:
+        name: pre-upgrade-job
+    image:
+      registry: artifactory.algol60.net
+      repository: csm-docker/stable/docker.io/bitnami/kubectl
+      tag: 1.32.3      
 
 
 
