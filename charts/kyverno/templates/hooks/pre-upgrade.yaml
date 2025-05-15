@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "kyverno.fullname" . }}-hook-pre-upgrade
+  name: {{ template "kyverno.pre-upgrade-job.name" . }}
   annotations:
     "helm.sh/hook": pre-upgrade
     "helm.sh/hook-weight": "10"
