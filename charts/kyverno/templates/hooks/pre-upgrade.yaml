@@ -35,5 +35,5 @@ spec:
       - name: delete-crd
         configMap:
           name: delete-crd
-          defaultMode: 0755
+          defaultMode: 0755          
 {{- end -}}
