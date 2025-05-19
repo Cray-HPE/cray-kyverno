@@ -17,7 +17,7 @@ data:
     IMAGE=$(kubectl get pod -n $NAMESPACE $FIRST_POD -o jsonpath="{.spec.containers[?(@.name=='kyverno')].image}")
 
     if [ -n "$IMAGE" ]; then
-      VERSION=$(echo $IMAGE | awk -F: '{print $2}')
+      VERSION=${IMAGE#*:}
     else
       echo "Kyverno container image not found in pod: $FIRST_POD"
     fi
