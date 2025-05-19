@@ -6,7 +6,7 @@ metadata:
   annotations:
     "helm.sh/hook": pre-upgrade
     "helm.sh/hook-weight": "10"
-    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+    "helm.sh/hook-delete-policy": hook-failed,before-hook-creation,hook-succeeded
 spec:
   template:
     spec:
@@ -35,5 +35,5 @@ spec:
       - name: delete-crd
         configMap:
           name: delete-crd
-          defaultMode: 0755          
+          defaultMode: 0755
 {{- end -}}
