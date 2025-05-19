@@ -8,4 +8,25 @@ metadata:
 data:
   deleteCRD.sh: |-
     #!/bin/sh
-    kubectl delete crd $(kubectl get crd -A | grep -i kyverno | awk '{print $1}')
+    NAMESPACE="kyverno"
+
+    PODS=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/component=admission-controller --field-selector=status.phase=Running -o jsonpath='{.items[*].metadata.name}')
+
+    FIRST_POD=$(echo $PODS | awk '{print $1}')
+
+    IMAGE=$(kubectl get pod -n $NAMESPACE $FIRST_POD -o jsonpath="{.spec.containers[?(@.name=='kyverno')].image}")
+
+    if [ -n "$IMAGE" ]; then
+      VERSION=$(echo $IMAGE | awk -F: '{print $2}')
+    else
+      echo "Kyverno container image not found in pod: $FIRST_POD"
+    fi
+
+    if [ "$VERSION" = "v1.10.7" ]; then
+      echo "Version is v1.10.7 — attempting to delete CRDs..."
+      CRDS=$(kubectl get crd -A | grep -i kyverno | awk '{print $1}')
+      kubectl delete crd $CRDS
+      echo "CRDs deleted successfully."
+    else
+      echo "Kyverno version does not match v1.10.7 — no action taken."
+    fi
