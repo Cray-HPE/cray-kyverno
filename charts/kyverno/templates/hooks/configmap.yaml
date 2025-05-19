@@ -24,7 +24,7 @@ data:
 
     if [ "$VERSION" = "v1.10.7" ]; then
       echo "Version is v1.10.7 — attempting to delete CRDs..."
-      CRDS=$(kubectl get crd -A | grep -i kyverno | awk '{print $1}')
+      CRDS=$(kubectl get crd -o custom-columns=NAME:.metadata.name | grep -i kyverno)
       kubectl delete crd $CRDS
       echo "CRDs deleted successfully."
     else
