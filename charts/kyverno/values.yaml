@@ -104,22 +104,22 @@ kyverno:
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/docker.io/bitnami/kubectl
-        tag: 1.32.3
+        tag: 1.33.1
     clusterAdmissionReports:
       image:
         registry: artifactory.algol60.net
         repository: csm-docker/stable/docker.io/bitnami/kubectl
-        tag: 1.32.3
+        tag: 1.33.1
   webhooksCleanup:
     image: 
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
-      tag: 1.32.3
+      tag: 1.33.1
   policyReportsCleanup:
     image: 
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
-      tag: 1.32.3    
+      tag: 1.33.1   
   buildKyvernoTrust:
     rbac:
       create: true
@@ -128,7 +128,7 @@ kyverno:
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
-      tag: 1.32.3
+      tag: 1.33.1
   deleteCrd:
     enabled: true
     rbac:
@@ -138,7 +138,7 @@ kyverno:
     image:
       registry: artifactory.algol60.net
       repository: csm-docker/stable/docker.io/bitnami/kubectl
-      tag: 1.32.3      
+      tag: 1.33.1      
 
 
 
