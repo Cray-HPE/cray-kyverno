@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: cray-kyverno
-version: 1.7.5
+version: 1.7.6
 appVersion: v1.13.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -21,7 +21,7 @@ maintainers:
   - name: ibrahim0809
     url: https://kyverno.io/
 engine: gotpl
-kubeVersion: ">=1.25.0-0"
+kubeVersion: ">=1.24.0-0"
 annotations:
   artifacthub.io/images: |-
     - name: kyverno
