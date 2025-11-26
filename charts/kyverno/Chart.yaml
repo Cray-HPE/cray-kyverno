@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: cray-kyverno
-version: 1.7.6
+version: 1.7.7
 appVersion: v1.13.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management

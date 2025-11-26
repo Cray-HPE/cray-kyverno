@@ -24,6 +24,9 @@ spec:
             - -c
             - |
               cd /usr/local/sbin && sh deleteCRD.sh
+              # Waiting to avoid webhook timeouts.
+              echo "Pre-upgrade delay: {{ .Values.kyverno.preUpgradeDelay }} seconds"
+              sleep {{ .Values.kyverno.preUpgradeDelay }}
           volumeMounts:
           - mountPath: /usr/local/sbin
             name: delete-crd
